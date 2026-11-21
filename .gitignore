@@ -1,0 +1,8 @@
+# Per-dev local overrides; never shared.
+.claude/settings.local.json
+
+# Scratch next to a draft or skill while working on it.
+**/.scratch/
+**/*.tmp
+
+.DS_Store
