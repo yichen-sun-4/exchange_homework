@@ -1,45 +1,28 @@
 # exchange_homework
 
-A swap shelf for skills and context between devs. Each skill here is a file you can drop into your own
-`.claude/skills/` and use, and each draft is one that hasn't become a skill yet and is still being worked on.
+A swap shelf for skills and context between devs. Each topic gets its own folder of skills, drafts,
+and visuals. Copy a skill into your own `.claude/skills/` and Claude Code picks it up by name.
 
-**This repo is files, not a tool.** There's nothing to install or run. Copy a skill directory into a
-project (or `~/.claude/skills/`) and Claude Code picks it up by name.
+**This repo is files, not a tool.** There's nothing to install or run.
 
-```bash
-cp -R .claude/skills/staging_bronze ~/.claude/skills/        # one skill, user-wide
-cp -R .claude/skills/*              <repo>/.claude/skills/   # all of them, one project
-```
+## Folders
 
-## The medallion ladder
+| folder | what's in it |
+|---|---|
+| [`analytics_engineering/`](analytics_engineering/) | bronze → silver → gold dbt skills for data-airflow, a semantic-view draft, and a [layers visualizer](analytics_engineering/visualizer/layers.html) |
 
-The skills follow a dbt model as it moves up through the layers. Each one ends by naming the next.
-
-| layer | skill | turns | into |
-|---|---|---|---|
-| bronze | [`staging_bronze`](.claude/skills/staging_bronze/SKILL.md) | a raw Mongo collection in `PROCESSED` | an ODS view + `stg_*` staging model |
-| silver | [`transforming_silver`](.claude/skills/transforming_silver/SKILL.md) | staging models | transformation models (`models/transformation/`) |
-| gold | [`reporting_gold`](.claude/skills/reporting_gold/SKILL.md) | transformation models | reporting models and their consumers (`models/reporting/`) |
-| semantic | [`drafts/semantic_view.md`](drafts/semantic_view.md) — **draft** | gold models | Snowflake semantic views |
-
-## Layout
+## Layout of a topic folder
 
 ```
-.claude/skills/<name>/SKILL.md        a finished skill; the frontmatter `name` matches the directory
-.claude/skills/<name>/references/     the SQL / scripts the skill tells you to run
-drafts/<topic>.md                     not a skill yet; open questions are left in it on purpose
+<topic>/README.md                    what the folder covers, where each skill came from, how to install
+<topic>/skills/<name>/SKILL.md       a finished skill; the frontmatter `name` matches the directory
+<topic>/skills/<name>/references/    the SQL / scripts the skill tells you to run
+<topic>/drafts/<topic>.md            not a skill yet; open questions are left in it on purpose
+<topic>/visualizer/*.html            self-contained pages; open them in a browser
 ```
 
-## Provenance
-
-| skill | source | as of |
-|---|---|---|
-| `staging_bronze` | `data-airflow` `.claude/skills/mongo-collection-ingest/` | `origin/main` @ `1032dfdb`, copied verbatim except for `name:` |
-| `transforming_silver` | written from `data-airflow` `origin/main` | 2026-11-20 |
-| `reporting_gold` | written from `data-airflow` `origin/main` | 2026-11-20 |
-
-If a skill came from another repo, record the commit you copied it from. A copy with no commit on it
-can't be diffed against its source, and you won't be able to tell when it went stale.
+Skills aren't kept under `.claude/skills/` here, so this repo doesn't load them into its own
+sessions. Copy them to wherever you want to use them.
 
 ## House rules
 
@@ -52,4 +35,7 @@ How to write a skill is in [`AGENTS.md`](AGENTS.md). In short:
 3. **Every rule should trace back to an incident.** If you can't name what went wrong, delete the rule.
 4. **Numbers carry a date.** "326 unwired collections" means nothing without "measured 2026-10-06".
 5. **Drafts graduate by moving.** When a draft's open questions are closed, `git mv` it into
-   `.claude/skills/<name>/SKILL.md` and add a frontmatter block.
+   `<topic>/skills/<name>/SKILL.md` and add a frontmatter block.
+
+If a skill came from another repo, record the commit you copied it from in the topic README. A copy
+with no commit on it can't be diffed against its source, and you won't be able to tell when it went stale.

@@ -1,8 +1,8 @@
 # semantic_view — drafting doc
 
 > **Status: DRAFT.** As of 2026-11-20. Not a skill yet — the open questions at the bottom
-> must be settled first. Step 4 of 4: [staging_bronze](../.claude/skills/staging_bronze/) →
-> transforming_silver → [reporting_gold](../.claude/skills/reporting_gold/) → **semantic view**.
+> must be settled first. Step 4 of 4: [staging_bronze](../skills/staging_bronze/) →
+> transforming_silver → [reporting_gold](../skills/reporting_gold/) → **semantic view**.
 > Facts below were read from `data-airflow` **origin/main** on 2026-11-20; counts drift.
 
 ## Thesis
@@ -55,7 +55,7 @@ shouldn't have to know `_V1_0_0`", that is the DATABOT problem, and it is an ope
 
 ## Inputs required from the gold model before drafting
 
-Do not start until the gold model (see [reporting_gold](../.claude/skills/reporting_gold/))
+Do not start until the gold model (see [reporting_gold](../skills/reporting_gold/))
 can hand you all of these, measured, with a date:
 
 | input | why the view needs it |

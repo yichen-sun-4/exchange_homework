@@ -228,4 +228,4 @@ column list equals what you declared.
       rename or column removal.
 
 For a semantic view over this model (sink key, databot, Cortex), hand off to
-`drafts/semantic_view.md`. For the silver model underneath, see `transforming_silver`.
+`analytics_engineering/drafts/semantic_view.md`. For the silver model underneath, see `transforming_silver`.
