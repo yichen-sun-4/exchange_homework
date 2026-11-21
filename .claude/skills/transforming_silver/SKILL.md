@@ -194,10 +194,6 @@ changed upstream's `ANALYTICS.<SCHEMA>_DEV.<model>` with `( <its compiled SQL> )
 **lowercase**, and every fragment opens `WITH source AS (…)`, so nested fragments collide —
 prefix each fragment's CTE names (`source` → `f3_source`), except `scd_2`.
 
-A `--select`-scoped run truncates three git-tracked CSVs via `on-run-end`
-(`adhoc/testing/dws_report.csv`, `scripts/dp3_migration/inventory_rds_*.csv`).
-`git restore` them before committing.
-
 ---
 
 ## 7 · After merge
@@ -244,7 +240,7 @@ A `--select`-scoped run truncates three git-tracked CSVs via `on-run-end`
 - [ ] Added columns found by `grep` in the compiled SQL, not just the source.
 - [ ] yml entry in the domain `*_schemas.yml` with `data_tests:` — grain test + `not_null` on keys;
       `dbt test` passes in DEV with counts quoted (it will not run anywhere else).
-- [ ] Tracked CSVs restored; no `select=` added to a DAG.
+- [ ] No `select=` added to a DAG.
 - [ ] Stated which consumers need a rebuild or re-grant after merge.
 
 For the commit and PR, hand off to `/commit`. For a model consumers or dashboards read directly,
